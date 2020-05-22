@@ -5,7 +5,7 @@ Sujet disponible [ici](https://moodle-campus.u-bourgogne.fr/pluginfile.php/17860
 
 * RIGLET Flavien - [*@Flav52*](https://github.com/Flav52)
 * ABDELRAZEK Mohamed - [*@Ulquii*](https://github.com/Ulquii)
-* FERNANDES Alexandre - [*TODO*](https://github.com/LeLunaa)
+* FERNANDES Alexandre - [*@LeLunaa*](https://github.com/LeLunaa)
 * HANECHE Zakaria - [*@Zakhan*](https://github.com/Zakhan-droid)
 * BELTRAMO Emeric - [*@Beltramem*](https://github.com/Beltramem)
 
