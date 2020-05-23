@@ -1,4 +1,6 @@
 function imageTatoue = tatouageJstegAdaptatif(mess,I)
+%mise en forme de l'image 
+I = double(miseEnFormeImage(I,8));
 %init variable de base
 %on fait un clear pour "vider" l'index en persistance dans la fonction
 clear jstegAdaptatif;
