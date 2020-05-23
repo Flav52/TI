@@ -16,7 +16,7 @@ fDDct =@(block_struct) idct2(block_struct.data);
 %début traitement JPEG/JSTEG encrypte
 %passage au domaine fréquenciel J-> DCT
 matriceDCT=blockproc(I,[8 8],fDct);
-%quantification P= matrice DCT quantifié pour tt l'image
+%quantification paq= matrice DCT quantifié et tatoué pour tt l'image 
 paq=blockproc(matriceDCT,[8 8],fTatou);
 
 
