@@ -1,4 +1,4 @@
-function marque= getMarque(I,tailleMarque)
+function marque= getMarque(I,tailleMarque,fq)
 
 %comme on travail avec blockproc il nous faut un moyen de partager la
 %marque déjà recupéré entre chaque, les pointeurs n'existent pas en matlab donc on doit
@@ -8,9 +8,6 @@ marquee = '0';
 %pour les mêmes raison on utilise un persistent pour partager l'index
 clear getMarqueBloc;
 
-
-%fq désigne le facteur de qualité
-fq= 5;
 
 %init matrice quantification
 Q = quantification(8,fq);

@@ -1,10 +1,9 @@
-function imageTatoue = tatouageJsteg(mess,I)
+function imageTatoue = tatouageJsteg(mess,I,fq)
 %mise en forme de l'image 
 I = double(miseEnFormeImage(I,8));
 %init variable de base
 %on fait un clear pour "vider" l'index en persistance dans la fonction
 clear jsteg;
-fq= 5;
 %init matrice quantification
 Q = quantification(8,fq);
 %init focntion DCT pour blockproc
@@ -13,9 +12,11 @@ fDct =@(block_struct) dct2(block_struct.data);
 fQuantification=@(block_struct) round(block_struct.data./Q);
 %init fonction tatouage
 fTatou= @(block_struct) jsteg(block_struct.data,mess);
+%init fonctiono zigzag qui parcours les blocs en zigzag
+
 
 fdeQuant = @(block_struct) block_struct.data.*Q;
-fDDct =@(block_struct) idct2(block_struct.data);
+fDDct =@(block_struct) round(idct2(block_struct.data));
 
 %début traitement JPEG/JSTEG encrypte
 %passage au domaine fréquenciel J-> DCT

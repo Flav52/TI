@@ -1,3 +1,7 @@
-i = imread('coul/s7708_29.jpg');
-i(3,1:end)
-res(3,1:end) =i(3,1:end);
+i= [125 1 0 0 0 1 0 0;0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0];
+zig = zigzag(i);
+rl = rle(zig);
+rl2 = rle(rl);
+
+symbole = unique(i);
+dd = compute_hufftree(zig);

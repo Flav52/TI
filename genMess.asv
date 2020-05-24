@@ -1,0 +1,4 @@
+function mess= genMess(taille)
+    mess ='0';
+    
+end
