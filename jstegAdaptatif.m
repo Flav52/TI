@@ -2,6 +2,7 @@ function res= jstegAdaptatif(essai,message,Q)
 %c'est lindex de la lettre à coder dans le message on utilise persistent
 %pour le partager entre les différent blocs
 persistent index
+global marquead;
 %on init le resultat avec les valeurs avant traitement
 res=essai;
 
@@ -18,6 +19,8 @@ end
         for j = 1:n
             %coef est la valeur absolu du coef présent dans la matrice
             coef = abs(res(i,j));
+            coefnnQuant = coef;
+            
             %la variable négatif nous permet de savoir si le coef était
             %négatif
             if(coef~=0)
@@ -25,45 +28,34 @@ end
             else
                 negatif=1;
             end
+            coefQuantnm = coef/Q(i,j);
             %si coef quantifé est suppérieur à 1 et que l'on a pas encore
             %récupérer tt le message alors on va tatouer ici 
-            if((coef/Q(i,j))>1 && index<=tailleMes(2))
-                d=0;
-                %on cherche la valeur du coef non quantifié la plus proche
-                %qui après quantification mène à une valeur entière possèdant un lsb équivalent au bit secret 
-                % on boucle tant que 'on ne 'a pas trouvé
-                while true
-                    %à chaque boucle on incrémente 'd' qui est l'ecart par rapport à l'orrondie de coef 
-                    d=d+1;
-                    %quantifSup/quantifInf est la valeur arrondie de coef+d/coef-d après
-                    %quantification 
-                    quantifSup= (floor(coef)+d)/Q(i,j)
-                    quantifInf=(floor(coef)-d)/Q(i,j)
-                    
-                    %si quantifSup est un nombre entier et qu'il possède un
-                    %lsb égal aux bit secret 
-                    if((quantifSup-floor(quantifSup))==0 && int2str(mod(quantifSup,2))==message(index)&& quantifSup>1)
-                            %on prend coef = coef+d pour la quantification
-                            coef=floor(coef)+d;
-                            %on sort de la boucle while
-                            break; 
-                            
-                    %sinon si quantifInf est un nombre entier et qu'il possède un
-                    %lsb égal aux bit secret ET qu'il est suppérieur à 1        
-                    elseif((quantifInf-floor(quantifInf))==0 && int2str(mod(quantifInf,2))==message(index) && quantifInf>1)
-                            %on prend coef = coef-d pour la quantification
-                            coef=floor(coef)-d;
-                            %on sort de la boucle while
-                            break;    
-                    end
+            if(floor(coef/Q(i,j))>1 && index<=tailleMes(2))
+                quantifInf= floor(coef/Q(i,j));
+                quantifSup= ceil(coef/Q(i,j));
+                LSBQuantifInf= mod(quantifInf,2);
+                if(int2str(LSBQuantifInf) == message(index))
+                    coef= quantifInf*Q(i,j);
+                else
+                    coef= quantifSup*Q(i,j);
                 end
-                %on avance l'index de 1e pour coder le bit secret suivant 
+                marquead(index)= int2str(mod(floor(coef/Q(i,j)),2));    
                 index =index+1;
-            end 
+            end
+            
+            
             %on place le coef tatoué ou non dans la matrice
                 %on utilise *negatif pour que le coef conserve son signe
                 %initial
-            res(i,j) = coef/Q(i,j)*negatif;
+            res(i,j) = floor(coef/Q(i,j))*negatif;
+            couille = res(i,j);
+            
+            disp("couille");
+
         end
+            if (abs(couille)>1 && int2str(mod(couille,2))~=message(index-1) && index<=tailleMes(2))
+                disp('couille')
+            end
     end
 return;

@@ -18,12 +18,11 @@ for i = 1:m
             coef = abs(tatou(i,j));
             %si coef est suppérieur à 1 et que l'on a pas encore
             %récupérer tt le message 
-            if(coef>1 && index<=tailleMarque(2))
+            if(round(coef>1) && index<=tailleMarque(2))
                 %on récupère le bit de poid faible du coef 
-                bin= dec2bin(coef,8);
-                lsb = bin(1,8);
+                lsb = int2str(mod(coef,2));
                 %on l'ajoute à la marque
-                marquee(1,index)=lsb;
+                marquee(index)=lsb;
                 %on avance l'index de 1e pour trouver le bit secret suivant 
                 index =index+1;
             end

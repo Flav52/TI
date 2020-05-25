@@ -1,11 +1,12 @@
+global marquead;
 i = imread('NG/lena256.png');
 I = miseEnFormeImage(i,8);
-fq=5;
-mess = genMess(5000);
+fq=1;
+mess = genMess(2000);
 tailleMarque = size(mess);
 
-itatouadapt = uint8(tatouageJstegAdaptatif(mess,I,fq));
-itatounrml = uint8(tatouageJsteg(mess,I,fq));
+itatouadapt = double(tatouageJstegAdaptatif(mess,I,fq));
+itatounrml = tatouageJsteg(mess,I,fq);
 
 PSNRnrml = PSNR(I,itatounrml);
 PSNRadap = PSNR(I,itatouadapt);
@@ -13,12 +14,11 @@ Gain=((PSNRadap/PSNRnrml)-1)*100;
 disp('PSNR Jpeg/Jsteg classique'); disp(PSNRnrml);
 disp('PSNR Jpeg/Jsteg adaptatif'); disp(PSNRadap);
 disp('Gain'); disp(Gain);
-
 subplot(1,3,1); imshow(I); title('Image de base');
 
-strPSNRnrml = strcat('PSVR classique :  ',int2str(PSNRnrml), ' dB')
-strPSNRadap = strcat('PSVR adaptatif :  ',int2str(PSNRadap), ' dB')
-strGain = strcat('Gain :  ',int2str(Gain), ' %')
+strPSNRnrml = strcat('PSVR classique :  ',num2str(PSNRnrml), ' dB')
+strPSNRadap = strcat('PSVR adaptatif :  ',num2str(PSNRadap), ' dB')
+strGain = strcat('Gain :  ',num2str(Gain), ' %')
 subplot(1,3,1); imshow(I); title('Image de base');
 subplot(1,3,2); imshow(itatounrml); title('Image Jpeg/Jsteg classique');
 text(0,300,strPSNRnrml); axis off

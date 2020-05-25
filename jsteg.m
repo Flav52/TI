@@ -26,8 +26,8 @@ end
                 negatif=1;
             end
             %si coef est suppérieur à 1 et que l'on a pas encore
-            %récupérer tt le message alors on va tatouer ic
-            if(coef>1 && index<=tailleMes(2))
+            %réupérer tt le message alors on va tatouer ic
+            if(floor(coef)>1 && index<=tailleMes(2))
                 %on passge le lsb à la valeur du bit secret 
                 bin= dec2bin(coef,8);
                 bin(1,8)=message(index);
