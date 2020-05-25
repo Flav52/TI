@@ -17,7 +17,7 @@ end
     for i = 1:m
         for j = 1:n
             %coef est la valeur absolu du coef présent dans la matrice
-            coef = abs(res(i,j));
+            coef = abs(essai(i,j));
             %la variable négatif nous permet de savoir si le coef était
             %négatif
             if(coef~=0)
@@ -27,10 +27,10 @@ end
             end
             %si coef est suppérieur à 1 et que l'on a pas encore
             %réupérer tt le message alors on va tatouer ic
-            if(floor(coef)>1 && index<=tailleMes(2))
+            if(round(coef)>1 && index<=tailleMes(2))
                 %on passge le lsb à la valeur du bit secret 
-                bin= dec2bin(coef,8);
-                bin(1,8)=message(index);
+                bin= dec2bin(round(coef));
+                bin(1,length(bin))=message(index);
                 %on place le coef tatoué dans la matrice
                 %on utilise *negatif pour que le coef conserve son signe
                 %initial

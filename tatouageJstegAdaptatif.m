@@ -10,15 +10,15 @@ clear jstegAdaptatif;
 Q = quantification(8,fq);
 Q= ones(8,8);
 %init focntion DCT pour blockproc
-fDct =@(block_struct) double(dct2(block_struct.data));
+fDct =@(block_struct) dct2(block_struct.data);
 %init fonction tatouage
-fTatou= @(block_struct) double(jstegAdaptatif(block_struct.data,mess,Q));
+fTatou= @(block_struct) jstegAdaptatif(block_struct.data,mess,Q);
 %permet de parcourir les blocs en zigzag avant la dernière étape de la compression
 fZigzag = @(block_struct) zigzag(block_struct.data);
 fRle = @(block_struct) zigzag(block_struct.data);
 
-fdeQuant = @(block_struct) double(block_struct.data.*Q);
-fDDct =@(block_struct) double(idct2(block_struct.data));
+fdeQuant = @(block_struct) block_struct.data.*Q;
+fDDct =@(block_struct) idct2(block_struct.data);
 
 %début traitement JPEG/JSTEG encrypte
 %passage au domaine fréquenciel J-> DCT
