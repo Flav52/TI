@@ -21,7 +21,6 @@ Gain=((PSNRadap/PSNRnrml)-1)*100;
 disp('PSNR Jpeg/Jsteg classique'); disp(PSNRnrml);
 disp('PSNR Jpeg/Jsteg adaptatif'); disp(PSNRadap);
 disp('Gain'); disp(Gain);
-subplot(1,3,1); imshow(I); title('Image de base');
 
 strPSNRnrml = strcat('PSNR classique :  ',num2str(PSNRnrml), ' dB')
 strPSNRadap = strcat('PSNR adaptatif :  ',num2str(PSNRadap), ' dB')
