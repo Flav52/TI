@@ -1,0 +1,22 @@
+function itatou = lsbRvb(I,message)
+
+persistent index;
+
+if(isempty(index))
+        index = 1 ;
+end
+
+itatout = I;
+tailleMess = size(message);
+[m,n]  = size(itatou);
+for i:m
+    for j:n
+        if(index<=tailleMess(2))
+            
+            if
+            
+        end
+    end
+end
+
+end 

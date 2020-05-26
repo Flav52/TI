@@ -5,7 +5,7 @@ marquead= '0';
 I = double(miseEnFormeImage(I,8));
 %init variable de base
 %on fait un clear pour "vider" l'index en persistance dans la fonction
-clear jstegAdaptatif;
+clear jstegAda  ptatif;
 %init matrice quantification
 Q = quantification(8,fq);
 Q = ones(8,8);

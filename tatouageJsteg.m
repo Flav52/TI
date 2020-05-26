@@ -10,7 +10,7 @@ Q = ones(8,8);
 %init focntion DCT pour blockproc
 fDct =@(block_struct) double(dct2(block_struct.data));
 %init focntion Quantification pour blockproc
-fQuantification=@(block_struct) double(round(block_struct.data./Q));
+fQuantification=@(block_struct) round(block_struct.data./Q);
 %init fonction tatouage
 fTatou= @(block_struct) double(jsteg(block_struct.data,mess));
 %init fonctiono zigzag qui parcours les blocs en zigzag
