@@ -3,15 +3,15 @@ function marque= getMarque(I,tailleMarque,fq)
 %comme on travail avec blockproc il nous faut un moyen de partager la
 %marque déjà recupéré entre chaque, les pointeurs n'existent pas en matlab donc on doit
 %passer puor une variable global 
-global marquee;
-marquee = '0';
+global marqued;
+marqued = '0';
 %pour les mêmes raison on utilise un persistent pour partager l'index
 clear getMarqueBloc;
 
 
 %init matrice quantification
 Q = quantification(8,fq);
-Q= ones(8,8);
+Q = ones(8,8);
 %init focntion DCT pour blockproc
 fDct =@(block_struct) dct2(block_struct.data);
 %init focntion Quantification pour blockproc
@@ -29,6 +29,6 @@ P=blockproc(matriceDCT,[8 8],fQuantification);
 blockproc(P,[8 8],fMarque);
 
 %on revoie la marque récupérée
-marque=marquee;
+marque=marqued;
 %disp(marque);
 

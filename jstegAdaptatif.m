@@ -4,7 +4,8 @@ function res= jstegAdaptatif(essai,message,Q)
 persistent index
 global marquead;
 %on init le resultat avec les valeurs avant traitement
-res=essai;
+ordre = essai.location;
+res=essai.data;
 
 [m,n] = size(res);
 tailleMes = size(message);
@@ -28,12 +29,18 @@ end
             else
                 negatif=1;
             end
+            if(index<=tailleMes(2))
             coefQuantnm = coef/Q(i,j);
             %si coef quantifé est suppérieur à 1 et que l'on a pas encore
             %récupérer tt le message alors on va tatouer ici 
-            if(floor(coef/Q(i,j))>1 && index<=tailleMes(2))
-                quantifInf= floor(coef/Q(i,j));
-                quantifSup= ceil(coef/Q(i,j));
+            if(coef/Q(i,j)>=2)
+                if(coef/Q(i,j)-floor(coef/Q(i,j))~=0)
+                    quantifInf= floor(coef/Q(i,j));
+                    quantifSup= ceil(coef/Q(i,j));
+                else
+                    quantifInf= coef/Q(i,j);
+                    quantifSup= coef/Q(i,j)+1;
+                end
                 LSBQuantifInf= mod(quantifInf,2);
                 if(int2str(LSBQuantifInf) == message(index))
                     coef= quantifInf*Q(i,j);
@@ -48,14 +55,19 @@ end
             %on place le coef tatoué ou non dans la matrice
                 %on utilise *negatif pour que le coef conserve son signe
                 %initial
-            res(i,j) = floor(coef/Q(i,j))*negatif;
-            couille = res(i,j);
-            
-            disp("couille");
-
-        end
-            if (abs(couille)>1 && int2str(mod(couille,2))~=message(index-1) && index<=tailleMes(2))
-                disp('couille')
             end
+            if(coef/Q(i,j)<2 && coef/Q(i,j)>=1.5)
+                 res(i,j) = floor(coef/Q(i,j))*negatif;
+            else
+                 res(i,j) = round(coef/Q(i,j))*negatif;
+            end 
+
+            if(coef/Q(i,j)>=2 && marquead(index-1)~=message(index-1))
+                disp(marquead(index-1));
+                disp(message(index-1));
+                disp("erreur");
+            end
+            
+        end
     end
 return;

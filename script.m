@@ -1,21 +1,22 @@
 global marquead;
+marquead = '0';
 i = imread('NG/lena256.png');
 I = miseEnFormeImage(i,8);
 fq=1;
-mess = genMess(2000);
+mess = genMess(6.5536e+03);
 tailleMarque = size(mess);
 
 itatouadapt = tatouageJstegAdaptatif(mess,I,fq);
 itatounrml = tatouageJsteg(mess,I,fq);
 
 marquenmrl = getMarque(itatounrml,tailleMarque,fq);
-marqueadapt = getMarque(itatouadapt,tailleMarque,fq);
+marqueadapt = getMarqueAdap(itatouadapt,tailleMarque,fq);
 
 valideAdapt = testMarqueValide(mess,marqueadapt);
 validemarquenmrl = testMarqueValide(mess,marquenmrl);
 
-PSNRnrml = PSNR(I,itatounrml);
-PSNRadap = PSNR(I,itatouadapt);
+PSNRnrml = psnr(uint8(itatounrml),uint8(I));
+PSNRadap = psnr(uint8(itatouadapt),uint8(I));
 Gain=((PSNRadap/PSNRnrml)-1)*100;
 disp('PSNR Jpeg/Jsteg classique'); disp(PSNRnrml);
 disp('PSNR Jpeg/Jsteg adaptatif'); disp(PSNRadap);

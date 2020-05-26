@@ -1,6 +1,6 @@
 function getMarqueBloc(tatou,tailleMarque)
 %on utilise la marque global
-global marquee;
+global marqued;
 %on récupère la taille du bloc, le système est donc evolutif si on veut
 %travailler avec des blos de 16/16 par exemple
 [m,n] = size(tatou);
@@ -18,11 +18,11 @@ for i = 1:m
             coef = abs(tatou(i,j));
             %si coef est suppérieur à 1 et que l'on a pas encore
             %récupérer tt le message 
-            if(round(coef>1) && index<=tailleMarque(2))
+            if(coef>1 && index<=tailleMarque(2))
                 %on récupère le bit de poid faible du coef 
                 lsb = int2str(mod(coef,2));
                 %on l'ajoute à la marque
-                marquee(index)=lsb;
+                marqued(index)=lsb;
                 %on avance l'index de 1e pour trouver le bit secret suivant 
                 index =index+1;
             end
